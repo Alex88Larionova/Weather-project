@@ -1,1 +1,1 @@
-![Image alt](./.github/media/app-main-view.jpg)
+![](./.github/media/app-main-view.jpg)
