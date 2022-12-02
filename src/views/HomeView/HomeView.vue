@@ -1,86 +1,85 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   showSettingsWindow: Boolean,
   showWeathersWindow: Boolean,
   weatherData: Object,
-  selectedTempUnits:String,
-  weatherTemp:String,
-  tempText:String
-});
+  selectedTempUnits: String,
+  weatherTemp: String,
+  tempText: String
+})
 
 
-const emit = defineEmits(["main", "closeSettings", "openSettings", "changeWeatherTemp"]);
+const emit = defineEmits(['main', 'closeSettings', 'openSettings', 'changeWeatherTemp'])
 
 const windDirection = computed(() => {
-  const windDeg = props.weatherData?.wind?.deg;
-  if (windDeg === 0) {
-    return "E";
+  const windDeg = props.weatherData?.wind?.deg
+  if (windDeg === 0 || windDeg === 360) {
+    return 'E'
   } else if (windDeg === 90) {
-    return "N";
+    return 'N'
   } else if (windDeg === 180) {
-    return "W";
+    return 'W'
   } else if (windDeg === 270) {
-    return "S";
+    return 'S'
   } else if (windDeg > 0 && windDeg < 90) {
-    return "NE";
+    return 'NE'
   } else if (windDeg > 90 && windDeg < 180) {
-    return "NW";
+    return 'NW'
   } else if (windDeg > 180 && windDeg < 270) {
-    return "SW";
+    return 'SW'
   } else if (windDeg > 270 && windDeg < 360) {
-    return "SE";
+    return 'SE'
   }
-  return windDeg;
-});
+  return windDeg
+})
 
 const windDegIcon = computed(() => {
-  if (windDirection.value === "E") {
-    return "wi wi-wind towards-90-deg";
-  } else if (windDirection.value === "N") {
-    return "wi wi-wind towards-0-deg";
-  } else if (windDirection.value === "W") {
-    return "wi wi-wind towards-270-deg";
-  } else if (windDirection.value === "S") {
-    return "wi wi-wind towards-180-deg";
-  } else if (windDirection.value === "NE") {
-    return "wi wi-wind towards-45-deg";
-  } else if (windDirection.value === "NW") {
-    return "wi wi-wind towards-313-deg";
-  } else if (windDirection.value === "SW") {
-    return "wi wi-wind towards-225-deg";
-  } else if (windDirection.value === "SE") {
-    return "wi wi-wind towards-135-deg";
+  if (windDirection.value === 'E') {
+    return 'wi wi-wind towards-90-deg'
+  } else if (windDirection.value === 'N') {
+    return 'wi wi-wind towards-0-deg'
+  } else if (windDirection.value === 'W') {
+    return 'wi wi-wind towards-270-deg'
+  } else if (windDirection.value === 'S') {
+    return 'wi wi-wind towards-180-deg'
+  } else if (windDirection.value === 'NE') {
+    return 'wi wi-wind towards-45-deg'
+  } else if (windDirection.value === 'NW') {
+    return 'wi wi-wind towards-313-deg'
+  } else if (windDirection.value === 'SW') {
+    return 'wi wi-wind towards-225-deg'
+  } else if (windDirection.value === 'SE') {
+    return 'wi wi-wind towards-135-deg'
   }
-  return windDegIcon;
-});
+  return windDegIcon
+})
 
 const iconClass = computed(() => {
-  const iconDescription = props.weatherData?.weather[0]?.description;
-  if (iconDescription === "broken clouds") {
-    return "wi wi-day-cloudy";
-  } else if (iconDescription === "sunny") {
-    return "wi wi-day-sunny";
-  } else if (iconDescription === "moderate rain") {
-    return "wi wi-rain";
-  } else if (iconDescription === "light rain") {
-    return "wi wi-day-rain";
-  } else if (iconDescription === "mist") {
-    return "wi wi-fog";
-  } else if (iconDescription === "overcast clouds") {
-    return "wi wi-cloudy";
-  } else if (iconDescription === "snow") {
-    return "wi wi-snow";
-  } else if (iconDescription === "light snow") {
-    return "wi wi-snow";
+  const iconDescription = props.weatherData?.weather[0]?.description
+  if (iconDescription === 'broken clouds' || iconDescription === 'scattered clouds') {
+    return 'wi wi-day-cloudy'
+  } else if (iconDescription === 'sunny') {
+    return 'wi wi-day-sunny'
+  } else if (iconDescription === 'moderate rain') {
+    return 'wi wi-rain'
+  } else if (iconDescription === 'light rain') {
+    return 'wi wi-day-rain'
+  } else if (iconDescription === 'mist') {
+    return 'wi wi-fog'
+  } else if (iconDescription === 'overcast clouds') {
+    return 'wi wi-cloudy'
+  } else if (iconDescription === 'snow') {
+    return 'wi wi-snow'
+  } else if (iconDescription === 'light snow') {
+    return 'wi wi-snow'
+  } else if (iconDescription === 'few clouds') {
+    return 'wi wi-cloudy'
   }
-  return "wi wi-day-sunny";
-});
+  return 'wi wi-day-sunny'
+})
 
-function changeTemp() {
-  isActiveTemp.value = !isActiveTemp.value;
-}
 </script>
 
 <template>
@@ -158,11 +157,15 @@ function changeTemp() {
 </template>
 
 <style>
+:root {
+  --text-color: rgb(88, 88, 88);
+  --main-background-color: rgb(180, 180, 180);
+}
+
 .app__header {
   width: 100%;
   text-align: center;
   display: flex;
-  /*  flex-direction: row; */
   align-items: baseline;
   justify-content: space-between;
   padding: 10px 20px;
@@ -181,14 +184,14 @@ function changeTemp() {
 }
 
 .app__weather-main {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open", sans-serif;
   font-weight: 400;
-  color: rgb(88, 88, 88);
+  color: var(--text-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  width: 300px;
+  width: 320px;
   height: 400px;
   background-color: rgb(230, 230, 230);
   border-radius: 20px;
@@ -198,7 +201,7 @@ function changeTemp() {
 }
 
 .app__weather-main p {
-  background-color: rgb(180, 180, 180);
+  background-color: var(--main-background-color);
   height: 1px;
   width: 70%;
 }
@@ -225,7 +228,7 @@ function changeTemp() {
 
 #app__weather-temp {
   cursor: pointer;
-  font-weight: 300;
+  font-weight: lighter;
   font-size: 40px;
   letter-spacing: 3px;
   transition: 0.7 ease-in;
@@ -238,7 +241,7 @@ function changeTemp() {
 
 #weather-icon {
   font-size: 42px;
-  color: rgb(82, 82, 82);
+  color: var(--text-color);
   margin: 0;
 }
 
