@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const props = defineProps({
   showSettingsWindow: Boolean,
@@ -97,9 +97,7 @@ const iconClass = computed(() => {
           {{ weatherData.name }}
         </div>
         <div class="app__weather-toolbar">
-          <span class="material-symbols-outlined"> chevron_left </span>
-          <span class="material-symbols-outlined"> chevron_right </span>
-          <span
+         <span
             class="material-symbols-outlined"
             @click="emit('openSettings')"
           >
